@@ -1,3 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    min-height: 100%;
+}
+
 .app {
+    border: 1px solid black;
+    height: 100vh;
+}
+
+.message-menu {
+    max-width: 30%;
+    width: 25%;
+    border: 1px solid black;
+    height: 100%;
+}
+
+.message-window {
+    height: 100%;
+    min-width: 70%;
     border: 1px solid black;
 }
