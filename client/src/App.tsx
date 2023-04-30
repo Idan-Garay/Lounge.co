@@ -3,7 +3,7 @@ import "./App.scss"
 
 const App = () => {
   return (
-    <div className='app'>very nice</div>
+    <div className='app'>very nice </div>
   )
 }
 
