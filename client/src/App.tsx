@@ -43,7 +43,15 @@ const App = () => {
       </aside>
       <main className='message-window'>
         <div className="window-header b">
-          
+          <div className="header-info">
+            <h3>Conversation Name</h3>
+          </div>
+
+          <div className="header-buttons">
+            <div className="icon-space"></div>
+            <div className="icon-space"></div>
+            <div className="icon-space"></div>
+          </div>
         </div>
 
         <div className="window-body b">

@@ -125,7 +125,23 @@ body {
 
     .window-header {
         min-height: min-content;
-        height: 70px;
+        height: 90px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px 12px;
+        padding-top: 9px;
+
+        .header-buttons {
+            display: flex;
+        }
+
+        .icon-space {
+            height: 40px;
+            width: 50px;
+            padding: 3px;
+            border: 1px solid black;
+        }
     }
 
     .window-body {
