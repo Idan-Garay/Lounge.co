@@ -81,9 +81,23 @@ body {
         .menu-header {
             // height: 100%;
             min-height: min-content;
-            height: 70px;
+            height: 80px;
+            // border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            // padding-bottom: ;
+
+            .header-right {
+                display: flex;
+            }
+        }
+
+        .icon-space {
+            height: 40px;
+            width: 50px;
+            padding: 3px;
             border: 1px solid black;
-            display: block;
         }
 
         .menu-search {

@@ -31,7 +31,11 @@ const App = () => {
 
         <div className="menu-right">
           <div className="menu-header">
-            <p>Chats</p>
+            <h1 className="header-left">Chats</h1>
+            <div className="header-right">
+              <div className="icon-space"></div>
+              <div className="icon-space"></div>
+            </div>
           </div>
 
           <input type="text" name="" id="" className="menu-search" placeholder="Search (⌘K)" />
