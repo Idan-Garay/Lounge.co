@@ -40,8 +40,14 @@ const App = () => {
 
           <input type="text" name="" id="" className="menu-search" placeholder="Search (⌘K)" />
 
-          <div className="menu-body">
+          <div className="menu-compose">
+            <div className="icon-space"></div>
+          </div>
 
+          <div className="menu-body">
+            {
+              Array(12).fill(null).map(() => <div className="menu-chat"></div>)
+            }
           </div>
         </div>
       </aside>
