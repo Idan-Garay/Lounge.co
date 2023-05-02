@@ -87,7 +87,7 @@ const App = () => {
 
         </div>
 
-        <div className="window-input b">
+        <div className="window-input">
           <div className="icon-space"></div>
           <textarea onChange={handleTextAreaChange} ref={textAreaRef} className='input-text' rows={1} placeholder="Type a message..."/>
           <div className="icon-space"></div>
