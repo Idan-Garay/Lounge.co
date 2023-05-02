@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./App.scss"
 
 // creating components -> data needed (state management -> backend)`
+const useDynamicHeightTextArea = (textAreaRef: HTMLTextAreaElement | null, value: string) => {
+  useEffect(() => {
+    if (textAreaRef) {
+      textAreaRef.style.height = "40px"
+      const scrollHeight = textAreaRef.scrollHeight
+      textAreaRef.style.height = scrollHeight + "px"
+    }
+  }, [textAreaRef, value])
+
+}
 
 const App = () => {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  const [message, setMessage] = useState("")
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const {value} = e.target
+    setMessage(value)
+  }  
+
+  useDynamicHeightTextArea(textAreaRef.current, message )
+  
   return (
     <div className='app'>
       <aside className='message-menu'>
@@ -64,12 +83,14 @@ const App = () => {
           </div>
         </div>
 
-        <div className="window-body b">
+        <div className="window-body">
 
         </div>
 
         <div className="window-input b">
-
+          <div className="icon-space"></div>
+          <textarea onChange={handleTextAreaChange} ref={textAreaRef} className='input-text' rows={1} placeholder="Type a message..."/>
+          <div className="icon-space"></div>
         </div>
       </main>
     </div>
