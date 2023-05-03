@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react-icons/bs"
-import { FaThumbsUp } from "react-icons/fa"
+import { BsSearch, BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react-icons/bs"
+import {IoChatbubbleEllipsesSharp, IoCall, IoVideocam, IoEllipsisHorizontal } from "react-icons/io5"
+import { HiArchiveBox } from "react-icons/hi2";
+import { MdVideoCall } from "react-icons/md";
+
+import { FaThumbsUp, FaStore } from "react-icons/fa"
+import { TbMessageCircle2Filled } from "react-icons/tb"
 
 import "./App.scss"
 
@@ -91,13 +96,13 @@ const App = () => {
         </div>
 
         <div className="window-input">
-          <BsPlusCircleFill size={15} />
+          <BsPlusCircleFill size={20} />
           <div className="input-group">
             <textarea onChange={handleTextAreaChange} ref={textAreaRef} className='input-text' rows={1} placeholder="Type a message..." />
-            <BsFileEarmarkFill size={15} />
-            <BsFillEmojiSmileFill size={15} />
+            <BsFileEarmarkFill size={20} />
+            <BsFillEmojiSmileFill size={20} />
           </div>
-          <FaThumbsUp size={15} />
+          <FaThumbsUp size={20} />
         </div>
       </main >
     </div >
