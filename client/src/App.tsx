@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react-icons/bs"
+import { FaThumbsUp } from "react-icons/fa"
+
 import "./App.scss"
 
 // creating components -> data needed (state management -> backend)`
@@ -17,12 +20,12 @@ const App = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [message, setMessage] = useState("")
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const {value} = e.target
+    const { value } = e.target
     setMessage(value)
-  }  
+  }
 
-  useDynamicHeightTextArea(textAreaRef.current, message )
-  
+  useDynamicHeightTextArea(textAreaRef.current, message)
+
   return (
     <div className='app'>
       <aside className='message-menu'>
@@ -57,7 +60,7 @@ const App = () => {
             </div>
           </div>
 
-          <input type="text" name="" id="" className="menu-search" placeholder="Search (⌘K)" />
+          <input type="text" name="" id="" className="menu-search" placeholder="🔍 Search (⌘K)" />
 
           <div className="menu-compose">
             <div className="icon-space"></div>
@@ -88,12 +91,16 @@ const App = () => {
         </div>
 
         <div className="window-input">
-          <div className="icon-space"></div>
-          <textarea onChange={handleTextAreaChange} ref={textAreaRef} className='input-text' rows={1} placeholder="Type a message..."/>
-          <div className="icon-space"></div>
+          <BsPlusCircleFill size={15} />
+          <div className="input-group">
+            <textarea onChange={handleTextAreaChange} ref={textAreaRef} className='input-text' rows={1} placeholder="Type a message..." />
+            <BsFileEarmarkFill size={15} />
+            <BsFillEmojiSmileFill size={15} />
+          </div>
+          <FaThumbsUp size={15} />
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   )
 }
 
