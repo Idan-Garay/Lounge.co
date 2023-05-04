@@ -178,7 +178,33 @@ body {
         flex-basis: 1;
         min-height: 300px;
         height: 100%;
-        max-height: 100%;
+        padding: 0px 15px;
+            overflow-y: scroll;
+
+        .window-scroll {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 3px;
+        }
+
+        .chat-text {
+            border: 1px solid black;
+            border-radius: 20px;
+            max-width: 40ch;
+            width: fit-content;
+            padding: 8px 12px;
+            word-wrap: break-word;
+        }
+
+        .left {
+            align-self: flex-start;
+        }
+
+        .right {
+            align-self: flex-end;
+
+        }
     }
 
     .icon-space {

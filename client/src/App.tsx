@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { BsSearch, BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react-icons/bs"
-import {IoChatbubbleEllipsesSharp, IoCall, IoVideocam, IoEllipsisHorizontal } from "react-icons/io5"
+import { IoChatbubbleEllipsesSharp, IoCall, IoVideocam, IoEllipsisHorizontal } from "react-icons/io5"
 import { HiArchiveBox } from "react-icons/hi2";
 import { MdVideoCall } from "react-icons/md";
 
@@ -92,7 +92,29 @@ const App = () => {
         </div>
 
         <div className="window-body">
-
+          <div className="window-scroll">
+            <div className="chat-text left">a</div>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
+          </div>
         </div>
 
         <div className="window-input">
