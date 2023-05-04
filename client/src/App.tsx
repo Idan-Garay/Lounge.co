@@ -38,21 +38,26 @@ const App = () => {
         <div className="menu-left">
           <div className="menu-top">
             <div className="icon-space active">
+              <TbMessageCircle2Filled size={20} className=" " />
+            </div>
+            <div className="icon-space">
+              <FaStore size={18} className=" " />
             </div>
 
             <div className="icon-space">
+              <IoChatbubbleEllipsesSharp size={20} className=" " />
+
             </div>
 
             <div className="icon-space">
-            </div>
-
-            <div className="icon-space">
+              <HiArchiveBox size={20} className=" " />
             </div>
           </div>
 
           <div className="menu-bottom">
 
             <div className="icon-space active">
+              <div className="bottom-picture"></div>
             </div>
           </div>
         </div>
