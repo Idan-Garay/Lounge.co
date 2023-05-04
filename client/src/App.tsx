@@ -61,21 +61,34 @@ const App = () => {
           <div className="menu-header">
             <h1 className="header-left">Chats</h1>
             <div className="header-right">
-              <MdVideoCall size={25}/>
-              <HiPencilAlt size={22}/>
+              <MdVideoCall size={25} />
+              <HiPencilAlt size={22} />
             </div>
           </div>
 
           <input type="text" name="" id="" className="menu-search" placeholder="🔍 Search (⌘K)" />
 
           <div className="menu-compose">
-            <div className="icon-space"></div>
+            <HiPencilAlt size={22} />
           </div>
 
           <div className="menu-body">
             {
-              Array(12).fill(null).map(() => <div className="menu-chat"></div>)
+              Array(12).fill(null).map(() => <div className="menu-chat">
+                <div className="chat-picture"></div>
+                <div className="chat-info">
+                  <h5>Convo Name</h5>
+                  <p>You: I've made I've made loren ipsum made loren ipsum made loren ipsum made loren ipsum made loren ipsum</p>
+                </div>
+              </div>)
             }
+            <div className="menu-chat active">
+              <div className="chat-picture"></div>
+              <div className="chat-info">
+                <h5>Convo Name</h5>
+                <p>You: 123 I've made ...</p>
+              </div>
+            </div>
           </div>
         </div>
       </aside>
