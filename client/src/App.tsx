@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { BsSearch, BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react-icons/bs"
 import { IoChatbubbleEllipsesSharp, IoCall, IoVideocam, IoEllipsisHorizontal } from "react-icons/io5"
 import { HiArchiveBox } from "react-icons/hi2";
+import { HiPencilAlt } from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
 
 import { FaThumbsUp, FaStore } from "react-icons/fa"
@@ -60,8 +61,8 @@ const App = () => {
           <div className="menu-header">
             <h1 className="header-left">Chats</h1>
             <div className="header-right">
-              <div className="icon-space"></div>
-              <div className="icon-space"></div>
+              <MdVideoCall size={25}/>
+              <HiPencilAlt size={22}/>
             </div>
           </div>
 
