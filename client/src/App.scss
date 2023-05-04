@@ -168,9 +168,24 @@ body {
         padding: 3px 12px;
         padding-top: 9px;
         flex-basis: 1;
+        border-bottom: 1px solid #EFEAE7;
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .info-picture {
+                border-radius: 50px;
+                border: 1px solid black;
+                height: 30px;
+                width: 30px;
+            }
+        }
 
         .header-buttons {
             display: flex;
+            gap: 16px;
         }
     }
 
@@ -179,7 +194,7 @@ body {
         min-height: 300px;
         height: 100%;
         padding: 0px 15px;
-            overflow-y: scroll;
+        overflow-y: scroll;
 
         .window-scroll {
             display: flex;
@@ -225,7 +240,7 @@ body {
         padding-left: 15px;
         padding-right: 15px;
 
-        & > * {
+        &>* {
             margin-bottom: 10px;
         }
 

@@ -79,39 +79,24 @@ const App = () => {
         </div>
       </aside>
       <main className='message-window'>
-        <div className="window-header b">
+        <div className="window-header">
           <div className="header-info">
-            <h3>Conversation Name</h3>
+            <div className="info-picture"></div>
+            <h4>Conversation Name</h4>
           </div>
 
           <div className="header-buttons">
-            <div className="icon-space"></div>
-            <div className="icon-space"></div>
-            <div className="icon-space"></div>
+            <IoCall size={20} />
+            <IoVideocam size={22} />
+            <BsSearch size={18} />
+            <IoEllipsisHorizontal />
           </div>
+
         </div>
 
         <div className="window-body">
           <div className="window-scroll">
             <div className="chat-text left">a</div>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
-            <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
             <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
             <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
           </div>
