@@ -110,7 +110,7 @@ const App = () => {
 
         <div className="window-body">
           <div className="window-scroll">
-            <div className="chat-text left">a</div>
+            <p className="chat-text left">a</p>
             <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
             <p className="chat-text right">012345678901234567890012345678900123456789001234567890</p>
           </div>

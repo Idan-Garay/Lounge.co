@@ -245,15 +245,22 @@ body {
             flex-direction: column;
             justify-content: flex-end;
             gap: 3px;
+            max-width: 100%;
         }
 
         .chat-text {
             border: 1px solid black;
             border-radius: 20px;
+            min-width: 1ch;
             max-width: 40ch;
-            width: fit-content;
             padding: 8px 12px;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        @media only screen and (max-width: 500px) {
+            .chat-text {
+                max-width: 32.5ch;
+            }
         }
 
         .left {
@@ -262,7 +269,6 @@ body {
 
         .right {
             align-self: flex-end;
-
         }
     }
 
