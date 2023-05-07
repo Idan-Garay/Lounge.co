@@ -1,0 +1,29 @@
+.window-header {
+    min-height: 67px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0px 12px;
+    padding-top: 9px;
+    padding-bottom: 6px;
+    flex-basis: 1;
+    border-bottom: 1px solid #EFEAE7;
+
+    .header-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .info-picture {
+            border-radius: 50px;
+            border: 1px solid black;
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    .header-buttons {
+        display: flex;
+        gap: 16px;
+    }
+}

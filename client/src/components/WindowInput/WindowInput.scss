@@ -1,0 +1,47 @@
+.window-input {
+    flex-basis: 1;
+    min-height: 50px;
+    min-width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &>* {
+        margin-bottom: 10px;
+    }
+
+    .input-group {
+        background-color: #F5F5F5;
+        flex-grow: 3;
+        height: 100%;
+        border: 1px solid;
+        border-radius: 20px;
+        max-height: 100%;
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        margin-bottom: 0px;
+
+        .input-text {
+            width: 100%;
+            outline: none;
+            background-color: transparent;
+            border: none;
+            border-radius: 25px;
+            max-height: 100%;
+            padding: 8px 12px;
+            resize: none;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    }
+
+    .input-text::-webkit-scrollbar {
+        width: 0px;
+    }
+}

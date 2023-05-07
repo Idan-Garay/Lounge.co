@@ -1,0 +1,38 @@
+.window-body {
+    flex-basis: 1;
+    min-height: 300px;
+    height: 100%;
+    padding: 0px 15px;
+    overflow-y: scroll;
+
+    .window-scroll {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 3px;
+        max-width: 100%;
+    }
+
+    .chat-text {
+        border: 1px solid black;
+        border-radius: 20px;
+        min-width: 1ch;
+        max-width: 40ch;
+        padding: 8px 12px;
+        overflow-wrap: break-word;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .chat-text {
+            max-width: 32.5ch;
+        }
+    }
+
+    .left {
+        align-self: flex-start;
+    }
+
+    .right {
+        align-self: flex-end;
+    }
+}
