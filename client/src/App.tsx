@@ -64,10 +64,10 @@ const App = () => {
 
         <div className="menu-right">
           <div className="menu-header">
-            <h1 className="header-left">Chats</h1>
+            <h3 className="header-left">Chats</h3>
             <div className="header-right">
-              <MdVideoCall size={25} />
-              <HiPencilAlt size={22} />
+              <MdVideoCall size={22} />
+              <HiPencilAlt size={20} />
             </div>
           </div>
 

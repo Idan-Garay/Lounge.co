@@ -92,8 +92,9 @@ body {
 
         .menu-header {
             min-height: min-content;
-            padding: 0 8px;
-            height: 80px;
+            padding: 6px 12px;
+            padding-bottom: 3px;
+            height: 70px;
             display: none;
 
             .header-right {
@@ -219,12 +220,13 @@ body {
     }
 
     .window-header {
-        min-height: 70px;
+        min-height: 67px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        padding: 3px 12px;
+        align-items: flex-end;
+        padding: 0px 12px;
         padding-top: 9px;
+        padding-bottom: 6px;
         flex-basis: 1;
         border-bottom: 1px solid #EFEAE7;
 
