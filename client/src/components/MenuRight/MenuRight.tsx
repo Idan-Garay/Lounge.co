@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./MenuRight.scss"
 import { HiPencilAlt } from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
 
 import ChatBox from "../ChatBox"
+import { socket } from '../../socket';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import { addToInbox, logout } from '../../../features/messaging/messagingSlice';
+import { User } from '../../../types';
 
 export default function () {
+    const inbox = useSelector((state:RootState) => state.messaging.inbox)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        socket.on("user-connects", (arg: User) => {
+            dispatch(addToInbox(arg))
+        })
+
+        socket.on("user-disconnect", (arg: User) => {
+            dispatch(logout(arg))
+        })
+
+        return () => {
+            socket.off("user-connects")
+            socket.off("user-disconnect")
+        }
+    }, [inbox])
     return <div className="menu-right">
         <div className="menu-header">
             <h3 className="header-left">Chats</h3>
@@ -22,15 +44,11 @@ export default function () {
         </div>
 
         <div className="menu-body">
-            <div className="menu-chat active">
-                <div className="chat-picture"></div>
-                <div className="chat-info">
-                    <h5>Convo Name</h5>
-                    <p>You: 123 I've made ...</p>
-                </div>
-            </div>
+            
             {
-                Array(12).fill(null).map(() => <ChatBox />)
+                inbox.length
+                ? inbox.map((item, index) => <ChatBox user={item} key={index} />)
+                : <ChatBox user={{username: "Convo Name", isOnline: true}} />
             }
         </div>
     </div>
