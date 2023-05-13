@@ -8,10 +8,10 @@ import { changeToUser } from '../../../features/messaging/messagingSlice'
 
 interface ChatBoxProps {
     user: User
-    // isSelected: boolean
+    isSelected: boolean
 }
 
-const ChatBox = ({user}: ChatBoxProps) => {
+const ChatBox = ({user, isSelected}: ChatBoxProps) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
@@ -19,7 +19,7 @@ const ChatBox = ({user}: ChatBoxProps) => {
     }
 
     return (
-        <div className="menu-chat" onClick={handleClick}>
+        <div className="menu-chat" data-selected={isSelected} onClick={handleClick}>
             <div className="chat-picture"></div>
             <div className="chat-info">
                 <h5>{user.username} - {user.isOnline ? "online": ""}</h5>

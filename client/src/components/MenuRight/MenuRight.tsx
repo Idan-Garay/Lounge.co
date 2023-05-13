@@ -23,11 +23,6 @@ export default function () {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log('inbox', inbox)
-        // socket.on("user-disconnect", (arg: User) => {
-        //     dispatch(logout(arg))
-        // })
-
         // socket.on("give-message-to-client", (data: Message) => {
         //     if (data.to.id === user.id || data.from.id === user.id) {
         //         dispatch(consumeMessage(data))
@@ -35,8 +30,6 @@ export default function () {
         // })
         
         return () => {
-            socket.off("user-connects")
-            socket.off("user-disconnect")
             socket.off("give-message-to-client")
         }
     }, [inbox])
@@ -58,10 +51,10 @@ export default function () {
         <div className="menu-body">
             {
                 inbox.length
-                ? inbox.map((item, index) => {
-                    return <ChatBox user={item.to} key={index} />
+                ? inbox.map((chatHistory, index) => {
+                    return <ChatBox user={chatHistory.to} key={index} isSelected={toUser && toUser.id === chatHistory.to.id} />
                 })
-                : <ChatBox user={user} />
+                : <ChatBox user={user} isSelected={true} />
             }
         </div>
     </div>

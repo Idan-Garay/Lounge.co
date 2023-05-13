@@ -44,7 +44,7 @@ export const messagingSlice = createSlice({
             if (idx !== -1) {
                 state.inbox[idx].messages.push(action.payload)
             }
-        }
+        },
     }
 })
 
