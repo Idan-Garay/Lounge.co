@@ -6,14 +6,14 @@ export interface MessagingState {
     inbox: ChatHistory[]
     user: User | null
     toUser: User | null
-    chatHistroyIndex: number
+    inboxIndex: number
 }
 
 export const initialState: MessagingState = {
     inbox: [],
     user: null,
     toUser: null,
-    chatHistroyIndex: -1
+    inboxIndex: -1
 }
 
 export const messagingSlice = createSlice({
@@ -25,7 +25,16 @@ export const messagingSlice = createSlice({
             console.log(state.user, 'stateUser')
         },
         changeToUser: (state, action: PayloadAction<User>) => {
-            state.toUser = action.payload
+            const toUser = action.payload
+            state.toUser = toUser
+            console.log(state.inbox[0].from, state.user.id, 'length')
+            const idx = state.inbox.findIndex(({from, to}) => {
+                return state.user && from.id === state.user.id && toUser.id === to.id
+            })
+
+            if (idx !== -1) {
+                state.inboxIndex = idx
+            }
         },
         updateInbox: (state, action: PayloadAction<ChatHistory>) => {
             console.log('inbox', state.inbox)
@@ -34,12 +43,13 @@ export const messagingSlice = createSlice({
         },
         fillInbox: (state, action: PayloadAction<ChatHistory[]>) => {
             state.inbox = action.payload
+            console.log('stateInbox', state.inbox)
         },
         consumeMessage: (state, action: PayloadAction<Message>) => {
             const inbox  = state.inbox
-            const {from, to} = action.payload
+            const {fromUserId, toUserId} = action.payload
             
-            const idx = inbox.findIndex(item => from === item.from.id && to === item.to.id )
+            const idx = inbox.findIndex(item => fromUserId === item.from.id && toUserId === item.to.id )
 
             if (idx !== -1) {
                 state.inbox[idx].messages.push(action.payload)

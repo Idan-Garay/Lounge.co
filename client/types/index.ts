@@ -5,8 +5,8 @@ export interface User {
 }
 
 export interface Message {
-    from: number
-    to: number
+    fromUserId: number
+    toUserId: number
     text: string
 }
 

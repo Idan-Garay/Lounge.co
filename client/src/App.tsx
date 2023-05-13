@@ -7,7 +7,7 @@ import MessageWindow from "./components/MessageWindow"
 import { socket } from "./socket"
 import { useDispatch, useSelector } from 'react-redux'
 import { changeUser, fillInbox, updateInbox } from '../features/messaging/messagingSlice'
-import { ChatHistory, User } from '../types'
+import { ChatHistory, Message, User } from '../types'
 import { RootState } from './app/store'
 
 const App = () => {
@@ -27,6 +27,7 @@ const App = () => {
         const chatHistory: ChatHistory = { from: myUser, to: user, messages: [] }
         return chatHistory
       })
+      console.log(chatHistories.length, "chatHistories")
 
       dispatch(fillInbox(chatHistories))
       dispatch(changeUser(myUser))
@@ -40,10 +41,10 @@ const App = () => {
 
   useEffect(() => {
     socket.on("user connected", (userConnected: User) => {
-      const me = inbox.length? inbox[0].from: null
-      
-      console.log('here 22', stateUser, inbox)
-      dispatch(updateInbox({ from: me, to: userConnected, messages: [] }))
+      // const me = inbox.length? inbox[0].from: null
+      const chatHistory = { from: stateUser? stateUser: null, to: userConnected, messages: [] as Message[] }
+      console.log("user_connected_chat_history", stateUser)
+      dispatch(updateInbox(chatHistory))
     })
 
     return () => {
