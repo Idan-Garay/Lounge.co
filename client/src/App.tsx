@@ -5,30 +5,50 @@ import MessageMenu from "./components/MessageMenu"
 import MessageWindow from "./components/MessageWindow"
 
 import { socket } from "./socket"
+import { useDispatch, useSelector } from 'react-redux'
+import { changeUser, fillInbox, updateInbox } from '../features/messaging/messagingSlice'
+import { ChatHistory, User } from '../types'
+import { RootState } from './app/store'
 
 const App = () => {
-  const [isConnect, setIsConnected] = useState(socket.connected)
-  const [fooEvents, setFooEvents] = useState([])
-  const [username, setUsername] = useState("")
+  const stateUser = useSelector((state: RootState) => state.messaging.user)
+  const inbox = useSelector((state: RootState) => state.messaging.inbox)
+  const dispatch = useDispatch()
 
   useEffect(() => {
+    const name = prompt("Enter username: ")
+    const user: User = { id: -1, username: name, isOnline: true }
+
     socket.connect()
-    if (!username.length) {
-      const name = prompt("Enter username: ")
-      setUsername(name)
-      socket.emit("login", { username: name, isOnline: true }, (serverReply: string) => console.log(serverReply))
-    }
+    socket.emit("connect user", user)
 
-    const cleanup = () => {
-      socket.emit("disconnect 2", { username })
+    socket.on("users", (users: User[], myUser) => {
+      const chatHistories: ChatHistory[] = users.map(user => {
+        const chatHistory: ChatHistory = { from: myUser, to: user, messages: [] }
+        return chatHistory
+      })
 
-    }
-    window.addEventListener('beforeunload', cleanup);
-
+      dispatch(fillInbox(chatHistories))
+      dispatch(changeUser(myUser))
+    })
 
     return () => {
-      window.removeEventListener("beforeunload", cleanup)
+      socket.off("users")
       socket.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    socket.on("user connected", (userConnected: User) => {
+      const me = inbox.length? inbox[0].from: null
+      
+      console.log('here 22', stateUser, inbox)
+      dispatch(updateInbox({ from: me, to: userConnected, messages: [] }))
+    })
+
+    return () => {
+      socket.off("user connected")
+
     }
   }, [])
 

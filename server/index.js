@@ -10,32 +10,32 @@ const io = new Server(httpServer, {
     }
 })
 
+const users = []
+
 io.on("connection", (socket) => {
     if (socket.connected) {
-        console.log('connected')
+        console.log('connected', users)
     } else {
         console.log('not connected')
     }
 
-    socket.on("login", (data) => {
-        io.emit("user-connects", data)
+    socket.on("connect user", (user) => {
+        const id = users.length ? users[users.length - 1].id + 1 : 0
+        user.id = id
+        users.push(user)
+        socket.emit("users", users, user)
+        let newUser = users.length ? users[users.length - 1] : null
+        socket.broadcast.emit("user connected", newUser)
     })
 
-    socket.on("disconnect 2", (data) => {
-        console.log('disconnect 2', data)
-        const idx = usernames.findIndex(item => item.username === data)
-        if (idx !== -1) {
-            usernames[idx].isOnline = false
-        }
-        socket.emit("user-disconnect", usernames)
-    })
+
+    socket.onAny((event, ...args) => {
+        console.log(event, args);
+    });
 
     socket.on("send-message-to-server", (data) => {
-        console.log('here', data)
-        // socket.send(data)
         socket.emit("give-message-to-client", data)
     })
 })
-
 
 httpServer.listen(PORT)

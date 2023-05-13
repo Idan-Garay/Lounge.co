@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./MenuRight.scss"
 import { HiPencilAlt } from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
@@ -7,25 +7,37 @@ import ChatBox from "../ChatBox"
 import { socket } from '../../socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { addToInbox, logout } from '../../../features/messaging/messagingSlice';
-import { User } from '../../../types';
+import { consumeMessage } from '../../../features/messaging/messagingSlice';
+import { Message, User } from '../../../types';
 
 export default function () {
     const inbox = useSelector((state:RootState) => state.messaging.inbox)
+    const toUser = useSelector((state:RootState) => state.messaging.toUser)
+    const user = useSelector((state:RootState) => {
+        let user: User = state.messaging.user
+        if (!user) {
+            user = {id: -1, username: "", isOnline: false}
+        }
+        return user
+    })
     const dispatch = useDispatch()
 
     useEffect(() => {
-        socket.on("user-connects", (arg: User) => {
-            dispatch(addToInbox(arg))
-        })
+        console.log('inbox', inbox)
+        // socket.on("user-disconnect", (arg: User) => {
+        //     dispatch(logout(arg))
+        // })
 
-        socket.on("user-disconnect", (arg: User) => {
-            dispatch(logout(arg))
-        })
-
+        // socket.on("give-message-to-client", (data: Message) => {
+        //     if (data.to.id === user.id || data.from.id === user.id) {
+        //         dispatch(consumeMessage(data))
+        //     }
+        // })
+        
         return () => {
             socket.off("user-connects")
             socket.off("user-disconnect")
+            socket.off("give-message-to-client")
         }
     }, [inbox])
     return <div className="menu-right">
@@ -44,11 +56,12 @@ export default function () {
         </div>
 
         <div className="menu-body">
-            
             {
                 inbox.length
-                ? inbox.map((item, index) => <ChatBox user={item} key={index} />)
-                : <ChatBox user={{username: "Convo Name", isOnline: true}} />
+                ? inbox.map((item, index) => {
+                    return <ChatBox user={item.to} key={index} />
+                })
+                : <ChatBox user={user} />
             }
         </div>
     </div>

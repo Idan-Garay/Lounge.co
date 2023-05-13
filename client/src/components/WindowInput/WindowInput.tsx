@@ -43,7 +43,6 @@ export default function () {
     useEffect(() => {
         const onConnect = () => setConnect(true)
         const disconnect = () => setConnect(false)
-        // setUsername(prompt("Enter username"))
 
         socket.on("connect", onConnect)
         socket.on("disconnect", disconnect)

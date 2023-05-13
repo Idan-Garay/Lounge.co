@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import "./ChatBox.scss"
 import { User } from '../../../types'
+import { useDispatch } from 'react-redux'
+import { changeToUser } from '../../../features/messaging/messagingSlice'
 
 
 interface ChatBoxProps {
     user: User
+    // isSelected: boolean
 }
 
 const ChatBox = ({user}: ChatBoxProps) => {
+    const dispatch = useDispatch()
+
+    const handleClick = () => {
+        dispatch(changeToUser(user))
+    }
+
     return (
-        <div className="menu-chat">
+        <div className="menu-chat" onClick={handleClick}>
             <div className="chat-picture"></div>
             <div className="chat-info">
                 <h5>{user.username} - {user.isOnline ? "online": ""}</h5>

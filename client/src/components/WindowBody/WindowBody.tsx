@@ -13,12 +13,6 @@ export default function () {
     const [messages, setMessages] = useState<Message[]>([])
 
     useEffect(() => {
-        socket.on("give-message-to-client", (data: Message) => {
-            setMessages(state => [...state, data])
-        })
-        return () => {
-            socket.off("give-message-to-client")
-        }
     }, [])
 
 
