@@ -19,16 +19,14 @@ const App = () => {
     const name = prompt("Enter username: ")
     const user: User = { id: -1, username: name, isOnline: true }
 
+    socket.auth = {user}
     socket.connect()
-    socket.emit("connect user", user)
 
     socket.on("users", (users: User[], myUser) => {
       const chatHistories: ChatHistory[] = users.map(user => {
         const chatHistory: ChatHistory = { from: myUser, to: user, messages: [] }
         return chatHistory
       })
-      console.log(chatHistories.length, "chatHistories")
-
       dispatch(fillInbox(chatHistories))
       dispatch(changeUser(myUser))
     })
@@ -40,10 +38,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    socket.on("user connected", (userConnected: User) => {
-      // const me = inbox.length? inbox[0].from: null
-      const chatHistory = { from: stateUser? stateUser: null, to: userConnected, messages: [] as Message[] }
-      console.log("user_connected_chat_history", stateUser)
+    socket.on("user connected", (clientUser, userConnected: User) => {
+      const chatHistory = { from: clientUser, to: userConnected, messages: [] as Message[] }
       dispatch(updateInbox(chatHistory))
     })
 
