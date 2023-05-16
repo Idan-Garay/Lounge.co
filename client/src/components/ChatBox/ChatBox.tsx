@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import "./ChatBox.scss"
 import { User } from '../../../types'
 import { useDispatch } from 'react-redux'
-import { changeToUser } from '../../../features/messaging/messagingSlice'
+import { changeToUserId } from '../../../features/messaging/messagingSlice'
 
 
 interface ChatBoxProps {
@@ -15,7 +15,8 @@ const ChatBox = ({user, isSelected}: ChatBoxProps) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        dispatch(changeToUser(user))
+        console.log('handleClick', user)
+        dispatch(changeToUserId(user.id))
     }
 
     return (

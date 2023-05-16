@@ -4,6 +4,10 @@ import { BsFillEmojiSmileFill, BsFileEarmarkFill, BsPlusCircleFill } from "react
 import { FaThumbsUp } from "react-icons/fa"
 import { IoSend } from "react-icons/io5"
 import { socket } from "../../socket"
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../app/store'
+import { Message, User } from '../../../types'
+import { sendMessage } from '../../../features/messaging/messagingSlice'
 
 const useDynamicHeightTextArea = (textAreaRef: HTMLTextAreaElement | null, value: string) => {
     useEffect(() => {
@@ -16,17 +20,16 @@ const useDynamicHeightTextArea = (textAreaRef: HTMLTextAreaElement | null, value
 
 }
 
-interface Message {
-    text: string
-    from: string
-}
-
 export default function () {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [message, setMessage] = useState("")
-    const [connected, setConnect] = useState(false)
-    const [username, setUsername] = useState("")
-
+    const toUserId = useSelector((state: RootState) => state.messaging.toUserId)
+    const fromUserId = useSelector((state: RootState) => {
+        const user = state.messaging.user
+        return user? user.id: null
+    })
+    const dispatch = useDispatch()
+    
     useDynamicHeightTextArea(textAreaRef.current, message)
 
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,24 +37,14 @@ export default function () {
         setMessage(value)
     }
 
-    const sendMessage = () => {
+    const handleSendMessage = () => {
         console.log('sending message')
-        socket.emit("send-message-to-server", { text: textAreaRef.current.value, from: username } as Message)
+        const message: Message = { text: textAreaRef.current.value, fromUserId: fromUserId, toUserId: toUserId }
+        socket.emit("send private message", message)
+        dispatch(sendMessage(message))
         textAreaRef.current.value = ""
     }
-
-    useEffect(() => {
-        const onConnect = () => setConnect(true)
-        const disconnect = () => setConnect(false)
-
-        socket.on("connect", onConnect)
-        socket.on("disconnect", disconnect)
-
-        return () => {
-            socket.off("connect")
-            socket.off("disconnect")
-        }
-    }, [])
+    
 
     return <div className="window-input">
         <BsPlusCircleFill size={20} />
@@ -61,7 +54,7 @@ export default function () {
             <BsFillEmojiSmileFill size={20} />
         </div>
         {message.length
-            ? <IoSend onClick={sendMessage} size={20} />
+            ? <IoSend onClick={handleSendMessage} size={20} />
             : <FaThumbsUp size={20} />}
     </div>
 }

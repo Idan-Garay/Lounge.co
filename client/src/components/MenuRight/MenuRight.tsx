@@ -7,32 +7,41 @@ import ChatBox from "../ChatBox"
 import { socket } from '../../socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { consumeMessage } from '../../../features/messaging/messagingSlice';
+import { changeUser } from '../../../features/messaging/messagingSlice';
 import { Message, User } from '../../../types';
 
 export default function () {
-    const inbox = useSelector((state:RootState) => state.messaging.inbox)
-    const toUser = useSelector((state:RootState) => state.messaging.toUser)
-    const user = useSelector((state:RootState) => {
+    const user = useSelector((state: RootState) => {
         let user: User = state.messaging.user
         if (!user) {
-            user = {id: -1, username: "", isOnline: false}
+            user = {
+                id: -1,
+                username: "",
+                isOnline: true,
+                hasNewMessages: false,
+                messages: []
+            }
         }
         return user
     })
+
+    const users = useSelector((state: RootState) => {
+        return state.messaging.users
+    })
+
+    const toUserId = useSelector((state: RootState) => state.messaging.toUserId)
+    
     const dispatch = useDispatch()
 
+    
+
     useEffect(() => {
-        // socket.on("give-message-to-client", (data: Message) => {
-        //     if (data.to.id === user.id || data.from.id === user.id) {
-        //         dispatch(consumeMessage(data))
-        //     }
-        // })
-        
-        return () => {
-            socket.off("give-message-to-client")
-        }
-    }, [inbox])
+        socket.on("user connected", (userConnected) => {
+            const chatHistory = { to: userConnected, from: user, messages: [] as Message[] }
+            console.log('chatHistory', chatHistory)
+        })
+    }, [])
+
     return <div className="menu-right">
         <div className="menu-header">
             <h3 className="header-left">Chats</h3>
@@ -50,11 +59,11 @@ export default function () {
 
         <div className="menu-body">
             {
-                inbox.length
-                ? inbox.map((chatHistory, index) => {
-                    return <ChatBox user={chatHistory.to} key={index} isSelected={toUser && toUser.id === chatHistory.to.id} />
-                })
-                : <ChatBox user={user} isSelected={true} />
+                users.length
+                    ? users.map((user, index) => {
+                        return <ChatBox user={user} key={index} isSelected={user.id === toUserId}  />
+                    })
+                    : <ChatBox user={user} isSelected={true} />
             }
         </div>
     </div>

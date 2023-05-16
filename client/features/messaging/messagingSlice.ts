@@ -1,19 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {ChatHistory, Message, User} from "../../types/index"
+import {Message, User} from "../../types/index"
 
 export interface MessagingState {
-    inbox: ChatHistory[]
     user: User | null
-    toUser: User | null
-    inboxIndex: number
+    users: User[]
+    toUserId: number
 }
 
 export const initialState: MessagingState = {
-    inbox: [],
     user: null,
-    toUser: null,
-    inboxIndex: -1
+    users: [],
+    toUserId: -1,
 }
 
 export const messagingSlice = createSlice({
@@ -21,43 +19,40 @@ export const messagingSlice = createSlice({
     initialState,
     reducers: {
         changeUser: (state, action: PayloadAction<User>) => {
-            state.user = action.payload
+            const user = action.payload
+            user.hasNewMessages = false
+            state.user = user
             console.log(state.user, 'stateUser')
         },
-        changeToUser: (state, action: PayloadAction<User>) => {
-            const toUser = action.payload
-            state.toUser = toUser
-            console.log(state.inbox[0].from, state.user.id, 'length')
-            const idx = state.inbox.findIndex(({from, to}) => {
-                return state.user && from.id === state.user.id && toUser.id === to.id
-            })
-
-            if (idx !== -1) {
-                state.inboxIndex = idx
+        changeToUserId: (state, action: PayloadAction<number>) => {
+            state.toUserId = action.payload
+        },
+        sendMessage: (state, action: PayloadAction<Message>) => {
+            const message = action.payload
+            const toUserIdx = state.users.findIndex(user => user.id === message.toUserId)
+            if (toUserIdx !== -1) {
+                state.users[toUserIdx].messages.push(message)
+                console.log('message pushed')
             }
         },
-        updateInbox: (state, action: PayloadAction<ChatHistory>) => {
-            console.log('inbox', state.inbox)
-            state.inbox.push(action.payload)
-            console.log('inbox', state.inbox)
+        changeUsers: (state, action: PayloadAction<User[]>) => {
+            state.users = action.payload
         },
-        fillInbox: (state, action: PayloadAction<ChatHistory[]>) => {
-            state.inbox = action.payload
-            console.log('stateInbox', state.inbox)
+        addUserToUsers: (state, action: PayloadAction<User>) => {
+            state.users.push(action.payload)
         },
-        consumeMessage: (state, action: PayloadAction<Message>) => {
-            const inbox  = state.inbox
-            const {fromUserId, toUserId} = action.payload
-            
-            const idx = inbox.findIndex(item => fromUserId === item.from.id && toUserId === item.to.id )
-
-            if (idx !== -1) {
-                state.inbox[idx].messages.push(action.payload)
+        receiveMessage: (state, action: PayloadAction<Message>) => {
+            const message = action.payload
+            const fromUserIdIndex = state.users.findIndex(user => user.id === message.fromUserId)
+            if (fromUserIdIndex !== -1) {
+                state.users[fromUserIdIndex].messages.push(message)
+                state.users[fromUserIdIndex].hasNewMessages = true
             }
-        },
+
+        }
     }
 })
 
-export const { changeUser, changeToUser, updateInbox, fillInbox, consumeMessage } = messagingSlice.actions
+export const { changeUser, changeToUserId, changeUsers, addUserToUsers, receiveMessage, sendMessage} = messagingSlice.actions
 
 export default messagingSlice.reducer
