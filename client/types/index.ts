@@ -1,5 +1,5 @@
 export interface User {
-    id: number
+    id: string
     username: string
     isOnline: boolean
     messages: Message[]
@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Message {
-    fromUserId: number
-    toUserId: number
+    fromUserId: string
+    toUserId: string
     text: string
 }

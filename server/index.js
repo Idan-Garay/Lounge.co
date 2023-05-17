@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
     const users = [] 
 
     for (let [id, socket] of io.of("/").sockets) {
-        const user = {...socket.user, id: id}
+        const user = {...socket.user, id: id,}
         users.push(user)
     }
 
@@ -50,6 +50,10 @@ io.on("connection", (socket) => {
         message.fromUserId = socket.id
         socket.to(message.toUserId).emit("private message", message)
         console.log('send-message-done', message.toUserId)
+    })
+
+    socket.on("disconnect", () => {
+        socket.broadcast.emit("user disconnect", socket.id)
     })
 })
 

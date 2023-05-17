@@ -36,7 +36,7 @@ export default function () {
     </div>
 }
 
-const ChatMessage = ({ message, stateUserId }: { message: Message, stateUserId: number }) => {
+const ChatMessage = ({ message, stateUserId }: { message: Message, stateUserId: string }) => {
     return message.fromUserId === stateUserId
         ? <p className="chat-text right">{message.text}</p>
         : <p className="chat-text left">{message.text}</p>

@@ -15,7 +15,7 @@ export default function () {
         let user: User = state.messaging.user
         if (!user) {
             user = {
-                id: -1,
+                id: "-1",
                 username: "",
                 isOnline: true,
                 hasNewMessages: false,
@@ -30,17 +30,6 @@ export default function () {
     })
 
     const toUserId = useSelector((state: RootState) => state.messaging.toUserId)
-    
-    const dispatch = useDispatch()
-
-    
-
-    useEffect(() => {
-        socket.on("user connected", (userConnected) => {
-            const chatHistory = { to: userConnected, from: user, messages: [] as Message[] }
-            console.log('chatHistory', chatHistory)
-        })
-    }, [])
 
     return <div className="menu-right">
         <div className="menu-header">

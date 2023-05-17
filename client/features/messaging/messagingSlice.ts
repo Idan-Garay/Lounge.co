@@ -5,13 +5,13 @@ import {Message, User} from "../../types/index"
 export interface MessagingState {
     user: User | null
     users: User[]
-    toUserId: number
+    toUserId: string
 }
 
 export const initialState: MessagingState = {
     user: null,
     users: [],
-    toUserId: -1,
+    toUserId: "-1",
 }
 
 export const messagingSlice = createSlice({
@@ -24,7 +24,7 @@ export const messagingSlice = createSlice({
             state.user = user
             console.log(state.user, 'stateUser')
         },
-        changeToUserId: (state, action: PayloadAction<number>) => {
+        changeToUserId: (state, action: PayloadAction<string>) => {
             state.toUserId = action.payload
         },
         sendMessage: (state, action: PayloadAction<Message>) => {
@@ -49,10 +49,29 @@ export const messagingSlice = createSlice({
                 state.users[fromUserIdIndex].hasNewMessages = true
             }
 
+        },
+        userDisconnect: (state, action: PayloadAction<string>) => {
+            const userId = action.payload
+            const users = state.users
+
+            state.users = users.map(user => {
+                if (user.id === userId) {
+                    user.isOnline = false
+                }
+                return user
+            })
         }
     }
 })
 
-export const { changeUser, changeToUserId, changeUsers, addUserToUsers, receiveMessage, sendMessage} = messagingSlice.actions
+export const { 
+    changeUser, 
+    changeToUserId, 
+    changeUsers, 
+    addUserToUsers, 
+    receiveMessage, 
+    sendMessage, 
+    userDisconnect
+} = messagingSlice.actions
 
 export default messagingSlice.reducer

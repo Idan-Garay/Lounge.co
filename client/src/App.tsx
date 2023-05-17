@@ -6,16 +6,17 @@ import MessageWindow from "./components/MessageWindow"
 
 import { socket } from "./socket"
 import { useDispatch, useSelector } from 'react-redux'
-import { addUserToUsers, changeUser, changeUsers } from '../features/messaging/messagingSlice'
+import { addUserToUsers, changeUser, changeUsers, userDisconnect } from '../features/messaging/messagingSlice'
 import { Message, User } from '../types'
 import { RootState } from './app/store'
 
 const App = () => {
   const dispatch = useDispatch()
+  const myUser = useSelector((state:RootState) => state.messaging.user)
 
   useEffect(() => {
     const username = prompt("Enter username:")
-    const user: User = {id: -1, username: username, isOnline: true, messages: [], hasNewMessages: false}
+    const user: User = {id: "-1", username: username, isOnline: true, messages: [], hasNewMessages: false}
     socket.auth = {user}
     socket.connect()
 
@@ -30,9 +31,14 @@ const App = () => {
       }
     });
 
+    socket.on("user disconnect", (userId) => {
+      dispatch(userDisconnect(userId))
+    })
+
     return () => {
       socket.off("users")
       socket.off("connect_error")
+      socket.off("user disconnect")
     }
   }, [])
 
