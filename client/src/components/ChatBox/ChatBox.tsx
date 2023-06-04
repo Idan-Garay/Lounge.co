@@ -11,20 +11,23 @@ interface ChatBoxProps {
     isSelected: boolean
 }
 
-const ChatBox = ({user, isSelected}: ChatBoxProps) => {
+const ChatBox = ({ user, isSelected }: ChatBoxProps) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        console.log('handleClick', user)
         dispatch(changeToUserId(user.id))
     }
 
     return (
         <div className="menu-chat" data-selected={isSelected} onClick={handleClick}>
-            <div className="chat-picture"></div>
+            <img src={user.profileImage} alt="profile" className="chat-avatar" />
             <div className="chat-info">
-                <h5>{user.username} - {user.isOnline ? "online": ""}</h5>
-                <p>You: I've made I've made loren ipsum made loren ipsum made loren ipsum made loren ipsum made loren ipsum</p>
+                <h5>{user.username}</h5>
+                <div className="overview">
+                    <p className="overview-message">{user.messageOverview}</p>
+                    <p className="overview-interpunct">·</p>
+                    <p className="overview-date">{user.lastMessageDate}</p>
+                </div>
             </div>
         </div>
     )

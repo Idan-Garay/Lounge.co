@@ -10,8 +10,11 @@ const MockState = {
     user: {
         id: "1",
         username: "User 1",
+        profileImage: "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2",
         isOnline: false,
         hasNewMessages: false,
+        messageOverview: "You: I've made I've made loren ipsum made loren ipsum made loren ipsum made loren ipsum made loren ipsum",
+        lastMessageDate: "4:25 PM",
         messages: []
     },
     isSelected: false
@@ -48,13 +51,21 @@ export const Selected = {
     args: {
         user: MockState.user,
         isSelected: true
-    }
+    } 
 }
 
 export const NotSelected = {
     decorators: [(story) => <MockStore chatBoxState={MockState}>{story()}</MockStore>],
     args: {
-        user: "User 1",
+        user: MockState.user,
+        isSelected: false
+    }
+}
+
+export const HasNewMessages = {
+    decorators: [(story) => <MockStore chatBoxState={MockState}>{story()}</MockStore>],
+    args: {
+        user: {...MockState.user, hasNewMessages: true},
         isSelected: false
     }
 }
