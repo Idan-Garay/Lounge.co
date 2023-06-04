@@ -14,13 +14,7 @@ export default function () {
     const user = useSelector((state: RootState) => {
         let user: User = state.messaging.user
         if (!user) {
-            user = {
-                id: "-1",
-                username: "",
-                isOnline: true,
-                hasNewMessages: false,
-                messages: []
-            }
+            user = { id: "-1", username: "", isOnline: true, messages: [], hasNewMessages: false, profileImage: "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2", messageOverview: "You: I've made I've made loren ipsum made loren ipsum made loren ipsum made loren ipsum made loren ipsum", lastMessageDate: "4:25 PM", }
         }
         return user
     })
@@ -50,7 +44,7 @@ export default function () {
             {
                 users.length
                     ? users.map((user, index) => {
-                        return <ChatBox user={user} key={index} isSelected={user.id === toUserId}  />
+                        return <ChatBox user={user} key={index} isSelected={user.id === toUserId} />
                     })
                     : <ChatBox user={user} isSelected={true} />
             }

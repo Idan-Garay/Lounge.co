@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     const username = prompt("Enter username:")
-    const user: User = {id: "-1", username: username, isOnline: true, messages: [], hasNewMessages: false}
+    const user: User = {id: "-1", username: username, isOnline: true, messages: [], hasNewMessages: false, profileImage: "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2", messageOverview: "You: I've made I've made loren ipsum made loren ipsum made loren ipsum made loren ipsum made loren ipsum",lastMessageDate: "4:25 PM",}
     socket.auth = {user}
     socket.connect()
 
