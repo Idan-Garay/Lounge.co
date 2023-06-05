@@ -6,12 +6,11 @@ import { TbMessageCircle2Filled } from "react-icons/tb"
 import { MdSettings } from "react-icons/md"
 
 import "./MenuLeft.scss"
+import { RootState } from '../../app/store';
+import { useSelector } from 'react-redux';
 
-interface MenuLeftProps {
-    profileImage: string
-}
-
-const MenuLeft = ({ profileImage }: MenuLeftProps) => {
+const MenuLeft = () => {
+    const profileImage = useSelector((state: RootState) => state.messaging.user.profileImage ?? "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2")
     const settingsElemRef = useRef<HTMLDivElement>(null)
     const [toggleSettings, setToggleSettings] = useState(false)
     const [currentItem, setCurrentItem] = useState("item 1")

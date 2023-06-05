@@ -24,8 +24,8 @@ const MockStore = ({ chatBoxState, children }) => {
     return <Provider
         store={configureStore({
             reducer: {
-                chatBox: createSlice({
-                    name: 'chatBox',
+                messaging: createSlice({
+                    name: 'messaging',
                     initialState: chatBoxState,
                     reducers: {
                         changeToUserId: (state, action: PayloadAction<string>) => {
