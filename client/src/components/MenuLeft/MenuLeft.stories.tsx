@@ -23,8 +23,6 @@ const MockState = {
 }
 
 const MockStore = ({ state, children }) => {
-    alert(`${JSON.stringify(state)} hello`)
-
     return <Provider
         store={configureStore({
             reducer: {

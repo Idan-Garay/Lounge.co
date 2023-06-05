@@ -10,21 +10,21 @@ import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
 
 const MenuLeft = () => {
-    const profileImage = useSelector((state: RootState) => state.messaging.user.profileImage ?? "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2")
+    const profileImage = useSelector((state: RootState) => state.messaging?.user?.profileImage ?? "https://images.pexels.com/photos/2078467/pexels-photo-2078467.jpeg?auto=compress&cs=tinysrgb&w=50&h=50&dpr=2")
     const settingsElemRef = useRef<HTMLDivElement>(null)
     const [toggleSettings, setToggleSettings] = useState(false)
     const [currentItem, setCurrentItem] = useState("item 1")
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
         setCurrentItem(e.currentTarget.dataset.itemName)
     }
-    const handleToggleSettings = () => {
-        setToggleSettings((toggleSettings) => !toggleSettings)
+    const handleToggleSettings = (value: boolean) => {
+        setToggleSettings(value)
     }
 
     useEffect(() => {
-        function handleClickOutside(event:MouseEvent) {
+        function handleClickOutside(event: MouseEvent) {
             if (settingsElemRef.current && !settingsElemRef.current.contains(event.target as Node)) {
-                handleToggleSettings()
+                handleToggleSettings(false)
             }
         }
         document.addEventListener("mousedown", handleClickOutside)
@@ -62,7 +62,7 @@ const MenuLeft = () => {
                         <p><b>Preferences</b></p>
                     </div>
                 </div>
-                <div className="icon-space active" onClick={handleToggleSettings}>
+                <div className="icon-space active" onClick={() => handleToggleSettings(!toggleSettings)}>
                     <img src={profileImage} alt="profile" className="bottom-picture" />
                 </div>
             </div>
