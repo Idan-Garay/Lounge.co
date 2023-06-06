@@ -4,11 +4,10 @@ import { HiPencilAlt } from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
 
 import ChatBox from "../ChatBox"
-import { socket } from '../../socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { changeUser } from '../../../features/messaging/messagingSlice';
-import { Message, User } from '../../../types';
+import { changeToUserId, changeUser } from '../../../features/messaging/messagingSlice';
+import { User } from '../../../types';
 
 export default function () {
     const user = useSelector((state: RootState) => {
@@ -24,6 +23,8 @@ export default function () {
     })
 
     const toUserId = useSelector((state: RootState) => state.messaging.toUserId)
+    const dispatch = useDispatch()
+    const generateHandleClickFn = (userId: string) => () => {dispatch(changeToUserId(userId))}
 
     return <div className="menu-right">
         <div className="menu-header">
@@ -44,9 +45,9 @@ export default function () {
             {
                 users.length
                     ? users.map((user, index) => {
-                        return <ChatBox user={user} key={index} isSelected={user.id === toUserId} />
+                        return <ChatBox user={user} key={index} isSelected={user.id === toUserId} handleClick={generateHandleClickFn(user.id)} />
                     })
-                    : <ChatBox user={user} isSelected={true} />
+                    : <ChatBox user={user} isSelected={true} handleClick={generateHandleClickFn(user.id)} />
             }
         </div>
     </div>

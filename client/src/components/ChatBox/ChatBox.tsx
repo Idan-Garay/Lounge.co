@@ -2,22 +2,15 @@ import React, { useState } from 'react'
 
 import "./ChatBox.scss"
 import { User } from '../../../types'
-import { useDispatch } from 'react-redux'
-import { changeToUserId } from '../../../features/messaging/messagingSlice'
 
 
 interface ChatBoxProps {
     user: User
     isSelected: boolean
+    handleClick: () => void
 }
 
-const ChatBox = ({ user, isSelected }: ChatBoxProps) => {
-    const dispatch = useDispatch()
-
-    const handleClick = () => {
-        dispatch(changeToUserId(user.id))
-    }
-
+const ChatBox = ({ user, isSelected, handleClick }: ChatBoxProps) => {
     return (
         <div className="menu-chat" data-selected={isSelected} onClick={handleClick}>
             <img src={user.profileImage} alt="profile" className="chat-avatar" />
