@@ -24,7 +24,9 @@ export default function () {
 
     const toUserId = useSelector((state: RootState) => state.messaging.toUserId)
     const dispatch = useDispatch()
-    const generateHandleClickFn = (userId: string) => () => {dispatch(changeToUserId(userId))}
+    const generateHandleClickFn = (userId: string) => () => {
+        dispatch(changeToUserId(userId))
+    }
 
     return <div className="menu-right">
         <div className="menu-header">

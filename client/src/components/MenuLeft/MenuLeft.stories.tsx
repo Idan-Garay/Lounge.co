@@ -7,8 +7,6 @@ export default {
     title: "MenuLeft",
 }
 
-
-
 export const Default = {
     decorators: [(story) => <MockStore state={MockState}>{story()}</MockStore>]
 }
