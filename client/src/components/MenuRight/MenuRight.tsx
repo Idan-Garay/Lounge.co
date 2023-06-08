@@ -6,7 +6,7 @@ import { MdVideoCall } from "react-icons/md";
 import ChatBox from "../ChatBox"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { changeToUserId, changeUser } from '../../../features/messaging/messagingSlice';
+import { changeToUserId } from '../../../features/messaging/messagingSlice';
 import { User } from '../../../types';
 
 export default function () {
@@ -32,7 +32,7 @@ export default function () {
         <div className="menu-header">
             <h3 className="header-left">Chats</h3>
             <div className="header-right">
-                <MdVideoCall size={22} />
+                {/* <MdVideoCall size={22} /> */}
                 <HiPencilAlt size={20} />
             </div>
         </div>
